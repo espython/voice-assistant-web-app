@@ -1,0 +1,119 @@
+/* our main variables */
+
+:root {
+    --mainGreen: #2EC4B6;
+    --mainDark: #011627;
+    --mainLight: #FDFFFC;
+    --mainRed: #E71D36;
+    --mainOrange: #FF9F1C;
+}
+
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: var(--mainLight);
+    color: var(--mainLight);
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important
+}
+
+/* root styles */
+
+#root {
+    height: 100%;
+}
+
+/* header styles */
+
+.header-banner {
+    background-color: var(--mainGreen) !important;
+}
+
+/* Footer styles */
+
+.footer {
+    background: var(--mainGreen);
+    color: var(--mainLight);
+}
+
+/* Link styles */
+
+a {
+    text-decoration: none;
+    color: var(--mainLight);
+}
+
+a:hover {
+    color: var(--mainLight);
+    text-decoration: none;
+}
+
+/* Main Components styles */
+
+.main-body {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+.main-component {
+    flex-grow: 1;
+}
+
+/* nav styles  */
+
+.nav-row {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.menu-items {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 8rem;
+}
+
+/* Landing page styles */
+
+.landing-banner {
+    height: 300px;
+    background: var(--mainGreen);
+}
+
+.landing-description {
+    color: var(--mainDark);
+    width: 40rem;
+}
+
+/* End of Landing page styles */
+
+/* Login page styles */
+
+.login-page {
+    color: var(--mainDark);
+    width: 30rem;
+    padding: 50px;
+}
+
+/* End of Login page styles */
+
+/* 404 Not-Found page styles */
+
+.not-found {
+    color: var(--mainDark);
+    font-size: 1.5rem;
+}
+
+.not-found-logo {
+    width: 100px;
+}
+
+/* End of 404 Not-Found page styles */
