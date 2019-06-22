@@ -36,13 +36,14 @@ function App() {
             <Switch>
               <Route exact path="/" component={Landing} />
               <Route path="/call" component={Call} />
+
               <Route path="/login" component={Login} />
+
               <Route path="/signup" component={Register} />
-              <Route component={NotFound} />
-              <Switch>
-                <PrivateRoute exact path="/home" component={Home} />
-                <PrivateRoute exact path="/profile" component={Profile} />
-              </Switch>
+
+              <PrivateRoute exact path="/home" component={Home} />
+              <PrivateRoute exact path="/profile" component={Profile} />
+              <Route path="*" component={NotFound} />
             </Switch>
           </Fragment>
         </Layout>

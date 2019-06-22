@@ -5,19 +5,20 @@ import setAuthToken from './setAuthToken';
 /**
  * Registartion post Request
  */
-const Register = (userData, history) => {
+export const RegisterNewUser = (userData, history) => {
   axios
     .post('/api/users/register', userData)
     .then(res => history.push('/login')) // re-direct to login on successful register
-    .catch(err => console.log(err));
+    .catch(err => console.log(err.response));
 };
 
 /**
  * Login Request
  */
+export const setCurrentUser = decoded => console.log('Decode', decoded);
 
 // Login - get user token
-export const loginUser = userData => dispatch => {
+export const loginUser = (userData, context, history) => {
   axios
     .post('/api/users/login', userData)
     .then(res => {
@@ -29,18 +30,22 @@ export const loginUser = userData => dispatch => {
       setAuthToken(token);
       // Decode token to get user data
       const decoded = jwtDecode(token);
+      console.log('Decoded', decoded);
+      context.setUserData({ decoded });
+      context.setAuth();
       // Set current user
-      dispatch(setCurrentUser(decoded));
+      setCurrentUser(decoded);
+      history.push('/home');
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      context.setError(err.response.data);
+    });
 };
 
 /**
  *
  * set auth token
  */
-
-export const setCurrentUser = decoded => console.log('Decode', decoded);
 
 // Log user out
 export const logoutUser = () => dispatch => {

@@ -39,7 +39,7 @@ passportConfig(passport);
 /**
  * Routes
  */
-app.use('/api/users', users);
+app.use('/api/users/', users);
 
 /**
  * Initiallize the server

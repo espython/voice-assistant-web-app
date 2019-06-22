@@ -117,3 +117,11 @@ ul {
 }
 
 /* End of 404 Not-Found page styles */
+
+/* Begin of Home page  */
+
+.home-page {
+    color: var(--mainDark);
+}
+
+/* End of Home page  */

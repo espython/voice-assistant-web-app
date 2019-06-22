@@ -14,6 +14,7 @@ const router = express.Router();
 router.post('/register', (req, res) => {
   // form validation
   const { errors, isValid } = validateRegisterInput(req.body);
+  console.log('body', req.body);
   // Check validation
   if (!isValid) {
     return res.status(400).json(errors);
@@ -36,7 +37,7 @@ router.post('/register', (req, res) => {
         newUser.password = hash;
         newUser
           .save()
-          .then(user => res.json(user))
+          .then(userSave => res.json(userSave))
           .catch(err => console.log(err));
       });
     });
@@ -49,6 +50,7 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res) => {
   // Form validation
   const { errors, isValid } = validateLoginInput(req.body);
+  console.log('Body', req.body);
   // Check validation
   if (!isValid) {
     return res.status(400).json(errors);
@@ -59,7 +61,7 @@ router.post('/login', (req, res) => {
   User.findOne({ email }).then(user => {
     // check if user exists
     if (!user) {
-      return res.status(404).json({ emailnotfound: 'Email not found' });
+      return res.status(404).json({ error: 'Email not found' });
     }
     // Check password
     bcrypt.compare(password, user.password).then(isMatch => {
@@ -82,9 +84,7 @@ router.post('/login', (req, res) => {
           }
         );
       } else {
-        return res
-          .status(400)
-          .json({ passwordincorrect: 'Password incorrect' });
+        return res.status(400).json({ error: 'Password incorrect' });
       }
     });
   });

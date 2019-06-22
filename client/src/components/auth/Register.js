@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { RegisterNewUser } from '../../utils/ApiReq';
 
 export default class Register extends Component {
+  /**
+   * assign our state
+   */
   state = {
     name: '',
     email: '',
@@ -9,11 +13,27 @@ export default class Register extends Component {
     errors: {},
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push('/home'); // push user to dashboard when they login
+    }
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors,
+      });
+    }
+  }
+
+  /**
+   * our custo Methods
+   */
+
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
 
   onSubmit = e => {
+    const { history } = this.props;
     e.preventDefault();
     const { name, email, password, password2 } = this.state;
     const newUser = {
@@ -23,6 +43,7 @@ export default class Register extends Component {
       password2,
     };
     console.log(newUser);
+    RegisterNewUser(newUser, history);
   };
 
   render() {
@@ -30,7 +51,7 @@ export default class Register extends Component {
     return (
       <div className=" container login-page">
         <div className="row justify-content-center pt-5 px-5">
-          <h3>Login Page</h3>
+          <h3>Sign up Page</h3>
         </div>
         <form action="" onSubmit={this.onSubmit} className="my-5">
           <div className="form-group">
@@ -82,7 +103,7 @@ export default class Register extends Component {
               placeholder="Confirm Password"
             />
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-danger">
             Submit
           </button>
         </form>
