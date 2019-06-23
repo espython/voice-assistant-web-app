@@ -6,9 +6,9 @@ export default function Footer() {
       <div className="container ">
         <div className="row">
           <div className="col-10 mx-auto col-md-6 text-center text-capitalize">
-            <h3>
+            <h5>
               All right reserved &copy;{new Date().getFullYear().toString()}
-            </h3>
+            </h5>
           </div>
         </div>
       </div>

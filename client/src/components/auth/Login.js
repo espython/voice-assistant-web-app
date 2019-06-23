@@ -37,8 +37,7 @@ export default class Login extends Component {
     };
 
     const geterrors = async () => {
-      await loginUser(userData, context, history);
-      console.log(context);
+      await loginUser(userData, history, context);
     };
     geterrors();
     // this.props.loginUser(userData);
@@ -53,7 +52,12 @@ export default class Login extends Component {
         </div>
         <AppConsumer>
           {context => (
-            <form action="" onSubmit={e => this.onSubmit(e, context)}>
+            <form
+              action=""
+              onSubmit={e => {
+                this.onSubmit(e, context);
+              }}
+            >
               <div className="form-group">
                 {context.state.errors ? (
                   <div className="alert alert-danger login-errors" role="alert">
@@ -84,7 +88,7 @@ export default class Login extends Component {
                   placeholder="Password"
                 />
               </div>
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-dark">
                 Submit
               </button>
             </form>

@@ -22,7 +22,7 @@ class ContextProvider extends Component {
           state: this.state,
           setError: error => this.setState({ errors: error }),
           setUserData: userData => this.setState({ userData }),
-          setAuth: isAuthenticated => this.setState({ isAuthenticated: true }),
+          setAuth: isAuth => this.setState({ isAuthenticated: isAuth }),
         }}
       >
         {children}
