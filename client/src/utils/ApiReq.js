@@ -67,3 +67,17 @@ export const logoutUser = context => {
   // Set current user to empty object {} which will set isAuthenticated to false
   // setCurrentUser({});
 };
+
+/**
+ * create post
+ */
+export const createPost = async postData => {
+  try {
+    const response = await axios.post('/api/post', postData);
+    const { data } = response;
+    console.log('Post data ==> ', data);
+    return data;
+  } catch (error) {
+    console.log('Create Post Error ==> ', error);
+  }
+};

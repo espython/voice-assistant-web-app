@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import passport from 'passport';
 import { config } from 'dotenv';
-import users from './routes/api/users';
+import { users, posts } from './routes/api';
 import passportConfig from './config/passport';
 /**
  * import DotEnv
@@ -40,6 +40,8 @@ passportConfig(passport);
  * Routes
  */
 app.use('/api/users/', users);
+// add post route
+app.use('/api/', posts);
 
 /**
  * Initiallize the server

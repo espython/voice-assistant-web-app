@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
@@ -9,6 +9,7 @@ import { Home, Profile, Call, Landing, NotFound } from './components/pages';
 import { Login, Register } from './components/auth';
 
 // Check for token to keep user logged in
+
 if (localStorage.jwtToken) {
   // Set auth token header auth
   const token = localStorage.jwtToken;
@@ -27,7 +28,7 @@ if (localStorage.jwtToken) {
   }
 }
 
-function App() {
+function App(decoded) {
   return (
     <ContextProvider>
       <Router>

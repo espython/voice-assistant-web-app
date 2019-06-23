@@ -11,6 +11,8 @@ class ContextProvider extends Component {
       isAuthenticated: false,
       errors: null,
       userData: null,
+      posts: null,
+      userPosts: null,
     };
   }
 
@@ -23,6 +25,10 @@ class ContextProvider extends Component {
           setError: error => this.setState({ errors: error }),
           setUserData: userData => this.setState({ userData }),
           setAuth: isAuth => this.setState({ isAuthenticated: isAuth }),
+          setPosts: posts => {
+            this.setState({ posts });
+          },
+          setProfilePosts: userPosts => this.setState({ userPosts }),
         }}
       >
         {children}

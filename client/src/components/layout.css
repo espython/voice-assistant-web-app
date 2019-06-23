@@ -127,8 +127,20 @@ ul {
     color: var(--mainLight);
 }
 
+.home-page-title {
+    color: var(--mainDark)
+}
+
 .add-post {
     width: 30rem;
+}
+
+.post-icon:hover {
+    cursor: pointer;
+}
+
+.active-icon {
+    color: var(--mainGreen);
 }
 
 /* End of Home page  */
