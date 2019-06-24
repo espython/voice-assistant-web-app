@@ -17,6 +17,9 @@ export default class Header extends Component {
                 <Fragment>
                   {context.state.isAuthenticated ? (
                     <div className="d-flex flex-row align-items-center p-2">
+                      <Link to="/home">
+                        <h5 className="mr-3">Home</h5>
+                      </Link>
                       <Link to="/profile">
                         <h5>profile</h5>
                       </Link>

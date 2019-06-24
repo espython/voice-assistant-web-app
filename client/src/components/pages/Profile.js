@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
-import { AppConsumer } from '../../ContextProvider';
-import { Post } from '../layout';
+import { AppConsumer, AppContext } from '../../ContextProvider';
+import { PostBody } from '../layout';
 
 export default class Profile extends Component {
   /**
@@ -9,13 +9,22 @@ export default class Profile extends Component {
    */
   state = {};
 
-  componentDidMount() {}
+  static contextType = AppContext;
+
+  componentDidMount() {
+    const { context } = this;
+    const userId = context.state.userData.id;
+    console.log('Context', context);
+
+    this.getUserPosts(userId, context);
+  }
 
   getUserPosts = async (userId, context) => {
     try {
-      const userPosts = await axios.get(`/api/posts/user:${userId}`);
-      console.log('userPosts', userPosts);
-      context.setProfilePosts(userPosts);
+      const userPosts = await axios.get(`/api/posts/user/${userId}`);
+      const { data, status } = await userPosts;
+      console.log('userPosts', { data, status });
+      context.setProfilePosts(data);
     } catch (error) {
       console.log('profile page', error.response);
     }
@@ -25,21 +34,17 @@ export default class Profile extends Component {
     return (
       <Fragment>
         <AppConsumer>
-          {context => {
-            const userId = context.state.userData.id;
-            console.log('Context', context);
-
-            this.getUserPosts(userId, context);
-            return context.state.userPosts ? (
-              <div className="row justify-content-center profile-page">
-                {context.profilePosts.map((post, i) => (
-                  <Post />
+          {context =>
+            context.state.userPosts ? (
+              <div className="container  profile-page">
+                {context.state.userPosts.map((post, i) => (
+                  <PostBody key={i} post={post.post} i={i} />
                 ))}
               </div>
             ) : (
               <h2 className="profile-page">Loading ...</h2>
-            );
-          }}
+            )
+          }
         </AppConsumer>
       </Fragment>
     );

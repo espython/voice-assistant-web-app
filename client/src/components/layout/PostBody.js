@@ -29,7 +29,7 @@ export default class PostBody extends Component {
     }
   };
 
-  addComment = e => {
+  onSubmit = e => {
     e.preventDefault();
   };
 
@@ -82,8 +82,8 @@ export default class PostBody extends Component {
           </div>
           {/* add comment componnent */}
           {showComment && (
-            <div className="card bg-dark p-3">
-              <form onSubmit={e => this.addComment(e, data)}>
+            <div className="card bg-dark p-3 mt-2 comment">
+              <form onSubmit={e => this.onSubmit(e)}>
                 <div className="form-group">
                   <input
                     type="text"

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const AppContext = React.createContext();
+export const AppContext = React.createContext();
 export const AppConsumer = AppContext.Consumer;
 
 class ContextProvider extends Component {

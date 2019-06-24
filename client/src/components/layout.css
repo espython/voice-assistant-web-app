@@ -81,7 +81,7 @@ ul {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 8rem;
+    width: 12rem;
 }
 
 /* Landing page styles */
@@ -150,7 +150,11 @@ ul {
 */
 
 .profile-page {
-    color: var(--mainDark);
+    color: var(--mainLight);
+}
+
+.comment {
+    border-color: var(--mainLight);
 }
 
 .logout-btn {

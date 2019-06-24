@@ -5,7 +5,7 @@ import { Post } from '../../models';
 const router = express.Router();
 
 router.post('/post', (req, res) => {
-  Post.create({ post: req.body.postText, author: req.body.author }, function(
+  Post.create({ post: req.body.commentText, author: req.body.author }, function(
     err,
     post
   ) {
