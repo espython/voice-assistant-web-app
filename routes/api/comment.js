@@ -1,19 +1,22 @@
 import express from 'express';
 
-import { Post } from '../../models';
+import { Comment } from '../../models';
 
 const router = express.Router();
 
-router.post('/post', (req, res) => {
-  Post.create({ post: req.body.commentText, author: req.body.author }, function(
-    err,
-    post
-  ) {
-    if (err) return res.status(400).json({ post: 'error save post' });
-    // saved!);
-    console.log('post saved successfully', post);
-    res.json(post);
-  });
+router.post('/comments', (req, res) => {
+  Comment.create(
+    { comment: req.body.commentText, author: req.body.author },
+    function(err, comment) {
+      if (err)
+        return res
+          .status(400)
+          .json({ commentError: 'error while saving comment' });
+      // saved!);
+      console.log('post saved successfully', comment);
+      res.json(comment);
+    }
+  );
 
   console.log('body', req.body);
 });
@@ -21,12 +24,12 @@ router.post('/post', (req, res) => {
 /**
  * get posts route
  */
-router.get('/posts/user/:id', (req, res) => {
+router.get('/comments/post/:id', (req, res) => {
   const { id } = req.params;
   console.log('id ==> ', id);
   try {
     const getPosts = async author => {
-      const postsArray = await Post.find({ author });
+      const postsArray = await Comment.find({ author });
       res.json(postsArray);
     };
     getPosts(id);

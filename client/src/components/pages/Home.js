@@ -18,6 +18,10 @@ export default class Home extends Component {
     showModal: false,
   };
 
+  /**
+   * Manage state component
+   */
+
   post = null;
 
   like = () => {

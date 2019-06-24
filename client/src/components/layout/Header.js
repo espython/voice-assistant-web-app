@@ -1,9 +1,43 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { AppConsumer } from '../../ContextProvider';
+import Artyom from 'artyom.js';
+import { AppConsumer, AppContext } from '../../ContextProvider';
+/**
+ * custom modules
+ */
 import { logoutUser } from '../../utils/ApiReq';
 
+/**
+ * starting of our class
+ */
 export default class Header extends Component {
+  /**
+   * Manage state & live cycle Method
+   */
+  static contextType = AppContext;
+
+  Jarvis = new Artyom();
+
+  componentDidMount() {
+    console.log('hello fro header');
+    window.addEventListener('load', this.Jarvis.say('Hello world !'));
+    this.Jarvis.say('Hello world !');
+    console.log('hello fro header22');
+
+    // this.jarvisGoodMorningCommand();
+    this.onDocumentLoadEventListener();
+  }
+
+  jarvisGoodMorningCommand = () => {
+    // Or the artisan mode to write less
+    console.log('Iam Jarvis');
+    this.Jarvis.on(['Good morning']).then(function(i) {
+      console.log('Triggered');
+    });
+  };
+
+  onDocumentLoadEventListener = () => {};
+
   render() {
     return (
       <nav className="header-banner pt-2">

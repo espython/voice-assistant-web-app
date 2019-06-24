@@ -42,7 +42,7 @@ export default class PostBody extends Component {
 
   showComment = (e, context) => {
     e.preventDefault();
-    const { post, posts, showComment } = this.state;
+    const { showComment } = this.state;
     !showComment
       ? this.setState({ showComment: true })
       : this.setState({ showComment: false });
@@ -95,7 +95,11 @@ export default class PostBody extends Component {
                 </div>
 
                 <div className="d-flex flex-row-reverse">
-                  <button className="btn btn-dark" type="submit">
+                  <button
+                    className="btn btn-dark"
+                    type="submit"
+                    onClick={e => this.showComment(e)}
+                  >
                     Add Comment
                   </button>
                 </div>

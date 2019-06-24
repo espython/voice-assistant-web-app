@@ -153,6 +153,17 @@ ul {
     color: var(--mainLight);
 }
 
+.profile-img {
+    vertical-align: middle;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.profile-text {
+    color: var(--mainDark);
+}
+
 .comment {
     border-color: var(--mainLight);
 }

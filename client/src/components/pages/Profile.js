@@ -3,19 +3,20 @@ import axios from 'axios';
 import { AppConsumer, AppContext } from '../../ContextProvider';
 import { PostBody } from '../layout';
 
+import profileImage from '../../static/profile.jpg';
+
 export default class Profile extends Component {
   /**
    * Define state & Member vars
    */
-  state = {};
 
   static contextType = AppContext;
+
+  state = {};
 
   componentDidMount() {
     const { context } = this;
     const userId = context.state.userData.id;
-    console.log('Context', context);
-
     this.getUserPosts(userId, context);
   }
 
@@ -31,12 +32,20 @@ export default class Profile extends Component {
   };
 
   render() {
+    const { context } = this;
+    const userName = context.state.userData.name;
     return (
       <Fragment>
         <AppConsumer>
           {context =>
             context.state.userPosts ? (
               <div className="container  profile-page">
+                <div className="text-center mt-5 p-3">
+                  <img src={profileImage} className="profile-img" alt="..." />
+                  <div className="container text-center mt-2 p-2">
+                    <h5 className="profile-text">{userName}</h5>
+                  </div>
+                </div>
                 {context.state.userPosts.map((post, i) => (
                   <PostBody key={i} post={post.post} i={i} />
                 ))}
