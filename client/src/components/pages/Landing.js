@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { AppContext, AppConsumer } from '../../ContextProvider';
+
+const contextType = AppContext;
 
 export default function Landing() {
   return (
