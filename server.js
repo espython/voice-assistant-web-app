@@ -15,7 +15,7 @@ import passportConfig from './config/passport';
 
 config();
 // Dfine our server port
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5000;
 
 const app = express();
 /**
