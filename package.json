@@ -2,10 +2,10 @@
   "name": "mern-auth-jwt",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon -r esm server.js",
-    "server": "nodemon -r esm server.js",
+    "start": "node  index.js",
+    "server": "nodemon  index.js",
     "client-install": "npm install --prefix client",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
