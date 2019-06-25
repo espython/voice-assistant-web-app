@@ -10,7 +10,7 @@ import { config } from 'dotenv';
 import { users, posts } from './routes/api';
 import passportConfig from './config/passport';
 /**
- * import DotEnv
+ * import DotEnv nicely
  */
 
 config();
