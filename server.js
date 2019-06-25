@@ -2,6 +2,7 @@
  * importing our modules
  */
 import express from 'express';
+import path from 'path';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import passport from 'passport';
@@ -42,6 +43,16 @@ passportConfig(passport);
 app.use('/api/users/', users);
 // add post route
 app.use('/api/', posts);
+/**
+ * serve static assets in production
+ */
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('client/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 /**
  * Initiallize the server
