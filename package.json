@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node -r esm server.js",
+    "start": "nodemon -r esm server.js",
     "server": "nodemon -r esm server.js",
     "client-install": "npm install --prefix client",
     "client": "npm start --prefix client",
