@@ -35,12 +35,12 @@ function App(decoded) {
         <Layout className="App">
           <Fragment>
             <Switch>
-              <Route exact path="/" component={Landing} />
+              <Route exact path="/" render={props => <Landing {...props} />} />
               <Route path="/call" component={Call} />
 
-              <Route path="/login" component={Login} />
+              <Route path="/login" render={props => <Login {...props} />} />
 
-              <Route path="/signup" component={Register} />
+              <Route path="/signup" render={props => <Register {...props} />} />
 
               <PrivateRoute exact path="/home" component={Home} />
               <PrivateRoute exact path="/profile" component={Profile} />

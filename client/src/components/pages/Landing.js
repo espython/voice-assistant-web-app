@@ -1,9 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Artyom from 'artyom.js';
 import { AppContext, AppConsumer } from '../../ContextProvider';
 
 const contextType = AppContext;
+const Jarvis = new Artyom();
 
-export default function Landing() {
+const jarvisGoodMorningCommand = history => {
+  // Or the artisan mode to write less
+
+  // initialize jarvis
+  Jarvis.initialize({
+    lang: 'en-GB',
+    debug: true, // Show what recognizes in the Console
+    listen: true, // Start listening after this
+    speed: 0.9, // Talk a little bit slow
+    mode: 'normal', // This parameter is not required as it will be normal by default
+  });
+
+  Jarvis.on(['Good morning']).then(function(i) {
+    alert('I said good Morning !!!');
+    history.push('/signup');
+  });
+};
+
+const sayHello = () => {
+  const { Jarvis } = this;
+  Jarvis.say('Hello I am Jarvis I am your virtual Assistant !');
+};
+
+const signUp = goSignup => {
+  if (!goSignup) {
+    this.setState({ goSignup: true });
+  }
+};
+
+// go to signup page
+const gotoSignUpPage = history => {
+  history.push('/signup');
+};
+
+export default function Landing(props) {
+  useEffect(() => {
+    // Update the document title using the browser API
+    const { history } = props;
+    console.log('history', history);
+    jarvisGoodMorningCommand(history);
+  });
+
   return (
     <div>
       <div className="landing-banner">

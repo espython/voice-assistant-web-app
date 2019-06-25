@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Artyom from 'artyom.js';
 import { AppConsumer, AppContext } from '../../ContextProvider';
 /**
@@ -16,27 +16,14 @@ export default class Header extends Component {
    */
   static contextType = AppContext;
 
-  Jarvis = new Artyom();
-
-  componentDidMount() {
-    console.log('hello fro header');
-    window.addEventListener('load', this.Jarvis.say('Hello world !'));
-    this.Jarvis.say('Hello world !');
-    console.log('hello fro header22');
-
-    // this.jarvisGoodMorningCommand();
-    this.onDocumentLoadEventListener();
-  }
-
-  jarvisGoodMorningCommand = () => {
-    // Or the artisan mode to write less
-    console.log('Iam Jarvis');
-    this.Jarvis.on(['Good morning']).then(function(i) {
-      console.log('Triggered');
-    });
+  state = {
+    goSignup: false,
+    signupLink: '/signup',
   };
 
-  onDocumentLoadEventListener = () => {};
+  Jarvis = new Artyom();
+
+  componentDidMount() {}
 
   render() {
     return (
