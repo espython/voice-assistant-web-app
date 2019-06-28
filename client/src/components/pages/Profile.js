@@ -18,7 +18,8 @@ export default class Profile extends Component {
     const { context } = this
     const userId = context.state.userData.id
     this.getUserPosts(userId, context)
-    this.getUserData(userId)
+    const userAvatar = this.getUserData(userId)
+    context.setUserAvatar({ userAvatar })
   }
 
   /**
@@ -32,10 +33,10 @@ export default class Profile extends Component {
       const userAvatar = `/api/${data.avatar}`
       console.log('my avatar ==>', userAvatar)
 
-      context.setUserAvatar({ userAvatar })
       this.setState({ avatar: userAvatar })
 
       console.log('userData', { data, status })
+      return userAvatar
     } catch (error) {
       console.log('profile page user Data', error.response)
     }
