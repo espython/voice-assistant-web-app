@@ -6,8 +6,25 @@ import setAuthToken from './setAuthToken';
  * Registartion post Request
  */
 export const RegisterNewUser = (userData, history) => {
+
+  // Deconstruct the userData object
+  const { name,
+    email,
+    password,
+    password2,
+    userAvatar } = userData;
+  // Initialize our Form data object
+  let formData = new FormData();
+  formData.append('name',name);
+  formData.append('email',email);
+  formData.append('password',password);
+  formData.append('password2',password2);
+  formData.append('userAvatar',userAvatar);
+
+  let config = { headers: { 'Content-Type': 'multipart/form-data' } }
+
   axios
-    .post('/api/users/register', userData)
+    .post('/api/users/register', formData, config)
     .then(res => history.push('/login')) // re-direct to login on successful register
     .catch(err => console.log(err.response));
 };
@@ -39,6 +56,7 @@ export const loginUser = (userData, history, context) => {
       // Set current user
       // context.setUserData(decoded);
       // context.setAuth(true);
+      console.log('decoded', decoded)
 
       setCurrentUser(decoded, context);
       //

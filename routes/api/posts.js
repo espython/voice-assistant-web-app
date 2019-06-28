@@ -1,41 +1,41 @@
-import express from 'express';
+import express from 'express'
 
-import { Post } from '../../models';
+import { Post } from '../../models'
 
-const router = express.Router();
+const router = express.Router()
 
 router.post('/post', (req, res) => {
-  Post.create({ post: req.body.postText, author: req.body.author }, function(
+  Post.create({ post: req.body.postText, author: req.body.author }, function (
     err,
     post
   ) {
-    if (err) return res.status(400).json({ post: 'error save post' });
+    if (err) return res.status(400).json({ post: 'error save post' })
     // saved!);
-    console.log('post saved successfully', post);
-    res.json(post);
-  });
+    console.log('post saved successfully', post)
+    res.json(post)
+  })
 
-  console.log('body', req.body);
-});
+  console.log('body', req.body)
+})
 
 /**
  * get posts route
  */
 router.get('/posts/user/:id', (req, res) => {
-  const { id } = req.params;
-  console.log('id ==> ', id);
+  const { id } = req.params
+  // console.log('id ==> ', id);
   try {
     const getPosts = async author => {
-      const postsArray = await Post.find({ author });
-      res.json(postsArray);
+      const postsArray = await Post.find({ author })
+      res.json(postsArray)
     };
-    getPosts(id);
+    getPosts(id)
 
     // res.json({ posts });
     // console.log('posts', posts);
   } catch (error) {
-    console.log('find posts Errors', error);
+    console.log('find posts Errors', error)
   }
-});
+})
 
-export default router;
+export default router

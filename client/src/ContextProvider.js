@@ -13,6 +13,7 @@ class ContextProvider extends Component {
       userData: null,
       posts: null,
       userPosts: null,
+      userAvatar:null
     };
   }
 
@@ -29,6 +30,7 @@ class ContextProvider extends Component {
             this.setState({ posts });
           },
           setProfilePosts: userPosts => this.setState({ userPosts }),
+          setUserAvatar:userAvatar => this.setState({userAvatar})
         }}
       >
         {children}

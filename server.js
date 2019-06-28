@@ -43,6 +43,8 @@ passportConfig(passport);
 app.use('/api/users/', users);
 // add post route
 app.use('/api/', posts);
+// serve our images
+app.use('/api/uploads', express.static('uploads'));
 /**
  * serve static assets in production
  */

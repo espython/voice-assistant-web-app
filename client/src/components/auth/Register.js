@@ -10,6 +10,7 @@ export default class Register extends Component {
     email: '',
     password: '',
     password2: '',
+    userAvatar:null,
     errors: {},
   };
 
@@ -25,22 +26,35 @@ export default class Register extends Component {
   }
 
   /**
-   * our custo Methods
+   * our custom Methods
    */
 
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
 
+  /**
+   * userProfileImage upload
+   */
+  onFileUpload = e =>{
+    const  file = e.target.files[0];
+    
+    this.setState({userAvatar:file})
+    
+
+  }
+
   onSubmit = e => {
     const { history } = this.props;
     e.preventDefault();
-    const { name, email, password, password2 } = this.state;
+    const { name, email, password, password2,userAvatar } = this.state;
+    
     const newUser = {
       name,
       email,
       password,
       password2,
+      userAvatar
     };
     console.log(newUser);
     RegisterNewUser(newUser, history);
@@ -53,7 +67,7 @@ export default class Register extends Component {
         <div className="row justify-content-center pt-5 px-5">
           <h3>Sign up Page</h3>
         </div>
-        <form action="" onSubmit={this.onSubmit} className="my-5">
+        <form action="" onSubmit={this.onSubmit} className="my-5" encType="multipart/form-data">
           <div className="form-group">
             <label htmlFor="exampleInputEmail1">Name</label>
             <input
@@ -100,6 +114,17 @@ export default class Register extends Component {
               type="password"
               className="form-control"
               id="password2"
+              placeholder="Confirm Password"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="userProfileImage">upload your profile Image</label>
+            <input
+            name="userAvatar"
+              onChange={e=>{this.onFileUpload(e)}}
+              type="file"
+              className="form-control"
+              id="userAvatar"
               placeholder="Confirm Password"
             />
           </div>
