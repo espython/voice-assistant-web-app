@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-export const AppContext = React.createContext();
-export const AppConsumer = AppContext.Consumer;
+export const AppContext = React.createContext()
+export const AppConsumer = AppContext.Consumer
 
 class ContextProvider extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
 
     this.state = {
       isAuthenticated: false,
@@ -13,12 +13,12 @@ class ContextProvider extends Component {
       userData: null,
       posts: null,
       userPosts: null,
-      userAvatar:null
-    };
+      userAvatar: null
+    }
   }
 
-  render() {
-    const { children } = this.props;
+  render () {
+    const { children } = this.props
     return (
       <AppContext.Provider
         value={{
@@ -27,16 +27,16 @@ class ContextProvider extends Component {
           setUserData: userData => this.setState({ userData }),
           setAuth: isAuth => this.setState({ isAuthenticated: isAuth }),
           setPosts: posts => {
-            this.setState({ posts });
+            this.setState({ posts })
           },
           setProfilePosts: userPosts => this.setState({ userPosts }),
-          setUserAvatar:userAvatar => this.setState({userAvatar})
+          setUserAvatar: userAvatar => this.setState({ userAvatar })
         }}
       >
         {children}
       </AppContext.Provider>
-    );
+    )
   }
 }
 
-export default ContextProvider;
+export default ContextProvider

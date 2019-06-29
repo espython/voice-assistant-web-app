@@ -38,4 +38,23 @@ router.get('/posts/user/:id', (req, res) => {
   }
 })
 
+/**
+ * get posts route
+ */
+router.get('/posts/', (req, res) => {
+  // console.log('id ==> ', id);
+  try {
+    const getPosts = async () => {
+      const postsArray = await Post.find({})
+      res.json(postsArray)
+    };
+    getPosts()
+
+    // res.json({ posts });
+    // console.log('posts', posts);
+  } catch (error) {
+    console.log('find posts Errors', error)
+  }
+})
+
 export default router

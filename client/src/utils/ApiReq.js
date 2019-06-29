@@ -1,42 +1,41 @@
-import axios from 'axios';
-import jwtDecode from 'jwt-decode';
-import setAuthToken from './setAuthToken';
+import axios from 'axios'
+import jwtDecode from 'jwt-decode'
+import setAuthToken from './setAuthToken'
 
 /**
  * Registartion post Request
  */
 export const RegisterNewUser = (userData, history) => {
-
   // Deconstruct the userData object
   const { name,
     email,
     password,
     password2,
-    userAvatar } = userData;
+    userAvatar } = userData
   // Initialize our Form data object
-  let formData = new FormData();
-  formData.append('name',name);
-  formData.append('email',email);
-  formData.append('password',password);
-  formData.append('password2',password2);
-  formData.append('userAvatar',userAvatar);
+  let formData = new FormData()
+  formData.append('name', name)
+  formData.append('email', email)
+  formData.append('password', password)
+  formData.append('password2', password2)
+  formData.append('userAvatar', userAvatar)
 
   let config = { headers: { 'Content-Type': 'multipart/form-data' } }
 
   axios
     .post('/api/users/register', formData, config)
     .then(res => history.push('/login')) // re-direct to login on successful register
-    .catch(err => console.log(err.response));
-};
+    .catch(err => console.log(err.response))
+}
 
 /**
  * Login Request
  */
 export const setCurrentUser = (decoded, context) => {
-  console.log('Context ==>', context);
-  context.setAuth(true);
-  context.setUserData(decoded);
-};
+  console.log('Context ==>', context)
+  context.setAuth(true)
+  context.setUserData(decoded)
+}
 
 // Login - get user token
 export const loginUser = (userData, history, context) => {
@@ -45,30 +44,30 @@ export const loginUser = (userData, history, context) => {
     .then(res => {
       // Save to localStorage
       // Set token to localStorage
-      const { token } = res.data;
-      console.log('Response', token);
-      localStorage.setItem('jwtToken', token);
+      const { token } = res.data
+      console.log('Response', token)
+      localStorage.setItem('jwtToken', token)
       // Set token to Auth header
-      setAuthToken(token);
+      setAuthToken(token)
       // Decode token to get user data
-      const decoded = jwtDecode(token);
+      const decoded = jwtDecode(token)
 
       // Set current user
       // context.setUserData(decoded);
       // context.setAuth(true);
       console.log('decoded', decoded)
 
-      setCurrentUser(decoded, context);
+      setCurrentUser(decoded, context)
       //
-      history.push('/home');
+      history.push('/home')
 
       //
     })
     .catch(err => {
-      console.log(err.response.data);
-      context.setError(err.response.data);
-    });
-};
+      console.log(err.response.data)
+      context.setError(err.response.data)
+    })
+}
 
 /**
  *
@@ -78,24 +77,24 @@ export const loginUser = (userData, history, context) => {
 // Log user out
 export const logoutUser = context => {
   // Remove token from local storage
-  localStorage.removeItem('jwtToken');
+  localStorage.removeItem('jwtToken')
   // Remove auth header for future requests
-  setAuthToken(false);
-  context.setAuth(false);
+  setAuthToken(false)
+  context.setAuth(false)
   // Set current user to empty object {} which will set isAuthenticated to false
   // setCurrentUser({});
-};
+}
 
 /**
  * create post
  */
 export const createPost = async postData => {
   try {
-    const response = await axios.post('/api/post', postData);
-    const { data } = response;
-    console.log('Post data ==> ', data);
-    return data;
+    const response = await axios.post('/api/post', postData)
+    const { data } = response
+    console.log('Post data ==> ', data)
+    return data
   } catch (error) {
-    console.log('Create Post Error ==> ', error);
+    console.log('Create Post Error ==> ', error)
   }
-};
+}
