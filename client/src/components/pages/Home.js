@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import axios from 'axios'
+import Artyoum from 'artyom.js'
 
 import { AppConsumer, AppContext } from '../../ContextProvider'
 import { Post, PostBody } from '../layout'
@@ -10,6 +11,7 @@ export default class Home extends Component {
    */
 
   static contextType = AppContext;
+  Jarvis = new Artyoum()
 
   state = {
     styles: {
@@ -29,6 +31,12 @@ export default class Home extends Component {
     const { context } = this
     console.log('Context', context)
     this.getHomePosts(context)
+    // setTimeout(() => {
+    //   this.startJarvis()
+    // }, 1500)
+    // setTimeout(() => {
+    //   this.jarvisAddCommands()
+    // }, 2500)
   }
 
   post = null;
@@ -68,6 +76,37 @@ export default class Home extends Component {
     console.log('showModel', showModal)
   };
 
+  // /**
+  //  * Beginning of Artyoum Implementation
+  //  */
+  // startJarvis = () => {
+  //   this.Jarvis.initialize({
+  //     lang: 'en-US',
+  //     continuous: true,
+  //     debug: true,
+  //     listen: true
+  //   })
+  //   window.alert('Jarvis is Running === !!!')
+  // }
+
+  // jarvisAddCommands = () => {
+  //   this.Jarvis.addCommands({ indexes: ['hello', 'hay'],
+  //     action: function (i) {
+  //       const localJarvis = new Artyoum()
+  //       if (i === 0) {
+  //         window.alert('hello from Jarvis')
+  //         localJarvis.say('hello i am here')
+  //       }
+  //     } })
+  // }
+
+  // stopJarvis = () => {
+  //   this.Jarvis.fatality()
+  // }
+
+  /**
+   * Beginning of Render Method
+   */
   render () {
     const { styles } = this.state
     const { context } = this

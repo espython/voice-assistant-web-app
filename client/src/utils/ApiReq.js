@@ -13,7 +13,7 @@ export const RegisterNewUser = (userData, history) => {
     password2,
     userAvatar } = userData
   // Initialize our Form data object
-  let formData = new FormData()
+  let formData = new window.FormData()
   formData.append('name', name)
   formData.append('email', email)
   formData.append('password', password)
@@ -64,7 +64,7 @@ export const loginUser = (userData, history, context) => {
       //
     })
     .catch(err => {
-      console.log(err.response.data)
+      console.log(err)
       context.setError(err.response.data)
     })
 }
