@@ -17,16 +17,19 @@ const jarvisGoodMorningCommand = history => {
     mode: 'normal' // This parameter is not required as it will be normal by default
   })
 
-  Jarvis.on(['Good morning']).then(function (i) {
-    alert('I said good Morning !!!')
+  Jarvis.on(['Sign up']).then(function (i) {
     history.push('/signup')
   })
-};
+
+  Jarvis.on(['Login']).then(function (i) {
+    history.push('/login')
+  })
+}
 
 const sayHello = () => {
   const { Jarvis } = this
   Jarvis.say('Hello I am Jarvis I am your virtual Assistant !')
-};
+}
 
 const signUp = goSignup => {
   if (!goSignup) {
@@ -37,7 +40,7 @@ const signUp = goSignup => {
 // go to signup page
 const gotoSignUpPage = history => {
   history.push('/signup')
-};
+}
 
 export default function Landing (props) {
   useEffect(() => {

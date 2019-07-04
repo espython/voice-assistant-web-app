@@ -84,7 +84,7 @@ startJarvis = () => {
     debug: true,
     listen: true
   })
-  window.alert('Jarvis is Running === !!!')
+  this.Jarvis.say('Hello, I am Jarvis I am  your virtual assistant please say begin to start writing your posts ')
 }
 
 jarvisAddCommands = (Jarvis) => {
@@ -123,7 +123,8 @@ jarvisAddCommands = (Jarvis) => {
       } else if (i === 1) {
         UserDictation.stop()
       }
-    } })
+    },
+    speed: 1 })
 }
 
 stopJarvis = () => {
