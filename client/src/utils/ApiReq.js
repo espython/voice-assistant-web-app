@@ -5,7 +5,7 @@ import setAuthToken from './setAuthToken'
 /**
  * Registartion post Request
  */
-export const RegisterNewUser = (userData, history) => {
+export const RegisterNewUser = (userData, history, context) => {
   // Deconstruct the userData object
   const { name,
     email,
@@ -24,8 +24,14 @@ export const RegisterNewUser = (userData, history) => {
 
   axios
     .post('/api/users/register', formData, config)
-    .then(res => history.push('/login')) // re-direct to login on successful register
-    .catch(err => console.log(err.response))
+    .then(res => {
+      context.setError(null)
+      history.push('/login')
+    }) // re-direct to login on successful register
+    .catch(err => {
+      console.log('ERR==>', err.response)
+      context.setError(err)
+    })
 }
 
 /**

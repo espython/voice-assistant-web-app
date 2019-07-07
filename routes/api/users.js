@@ -36,7 +36,7 @@ const upload = multer({ storage, limits, fileFilter });
 // @desc Register user
 // @access Public
 router.post('/register', upload.single('userAvatar'), (req, res) => {
-  console.log('avatar', req.file);
+  
   // form validation
   const { errors, isValid } = validateRegisterInput(req.body);
   console.log('body', req.body);
@@ -44,13 +44,17 @@ router.post('/register', upload.single('userAvatar'), (req, res) => {
   if (!isValid) {
     return res.status(400).json(errors);
   }
+  if(!req.file){
+    return res.status(400).json({"error":"no file uploaded"});
+  }
+  
 
   // Check the user is already in the database
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
       return res.status(400).json({ email: 'Email already exists' });
     }
-    console.log('file', req.file);
+    
     const newUser = new User({
       name: req.body.name,
       email: req.body.email,

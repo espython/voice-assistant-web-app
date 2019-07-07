@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { RegisterNewUser } from '../../utils/ApiReq'
+import { AppConsumer, AppContext } from '../../ContextProvider'
 
 export default class Register extends Component {
   /**
@@ -14,8 +15,10 @@ export default class Register extends Component {
     errors: {}
   };
 
+  static contextType = AppContext;
+
   componentWillReceiveProps (nextProps) {
-    if (nextProps.auth.isAuthenticated) {
+    if (nextProps.isAuthenticated) {
       this.props.history.push('/home') // push user to dashboard when they login
     }
     if (nextProps.errors) {
@@ -55,11 +58,13 @@ export default class Register extends Component {
       userAvatar
     }
     console.log(newUser)
-    RegisterNewUser(newUser, history)
+    RegisterNewUser(newUser, history, this.context)
   };
 
   render () {
+    const { context } = this
     const { name, email, password, password2, errors } = this.state
+
     return (
       <div className=' container login-page'>
         <div className='row justify-content-center pt-5 px-5'>
@@ -67,6 +72,11 @@ export default class Register extends Component {
         </div>
         <form action='' onSubmit={this.onSubmit} className='my-5' encType='multipart/form-data'>
           <div className='form-group'>
+            {context.state.errors ? (
+              <div className='alert alert-danger login-errors' role='alert'>
+                {JSON.stringify(context.state.errors.response.data)}
+              </div>
+            ) : null}
             <label htmlFor='exampleInputEmail1'>Name</label>
             <input
               onChange={this.onChange}
@@ -77,6 +87,7 @@ export default class Register extends Component {
               className='form-control'
               aria-describedby='nameHelp'
               placeholder='Enter your Name'
+              required
             />
           </div>
           <div className='form-group'>
@@ -90,6 +101,7 @@ export default class Register extends Component {
               className='form-control'
               aria-describedby='emailHelp'
               placeholder='Enter email'
+              required
             />
           </div>
           <div className='form-group'>
@@ -102,6 +114,7 @@ export default class Register extends Component {
               type='password'
               className='form-control'
               placeholder='Password'
+              required
             />
           </div>
           <div className='form-group'>
@@ -113,6 +126,7 @@ export default class Register extends Component {
               className='form-control'
               id='password2'
               placeholder='Confirm Password'
+              required
             />
           </div>
           <div className='form-group'>
@@ -124,6 +138,7 @@ export default class Register extends Component {
               className='form-control'
               id='userAvatar'
               placeholder='Confirm Password'
+              required
             />
           </div>
           <button type='submit' className='btn btn-danger'>
