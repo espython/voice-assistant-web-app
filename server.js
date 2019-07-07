@@ -34,7 +34,7 @@ mongoose
   .catch(err => console.log(err));
 
 /**
- * Passport config
+ * Passport config nicely
  */
 passportConfig(passport);
 /**
